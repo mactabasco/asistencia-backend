@@ -1,5 +1,7 @@
 // src/controllers/adminController.js
-import { PrismaClient } from '@prisma/client';
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg;
+
 import PDFDocument from 'pdfkit';
 import stream from 'stream';
 

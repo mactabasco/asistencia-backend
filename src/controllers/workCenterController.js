@@ -1,5 +1,7 @@
 // src/controllers/workCenterController.js
-import { PrismaClient } from '@prisma/client';
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg;
+
 import { generateWorkCenterPDF } from '../utils/qrService.js';
 
 const prisma = new PrismaClient();
