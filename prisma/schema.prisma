@@ -1,0 +1,80 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  SUPERADMIN
+  COORDINATOR
+  EMPLOYEE
+}
+
+enum LogType {
+  IN
+  OUT
+}
+
+enum AttendanceStatus {
+  ASISTENCIA
+  RETARDO
+  FALTA
+  JUSTIFICADO
+  FALLIDO_GPS
+}
+
+model State {
+  id          String        @id @default(uuid())
+  name        String        @unique // Ej: "Tabasco", "Quintana Roo"
+  users       User[]        // Coordinadores y empleados asignados a este estado
+  workCenters WorkCenter[]
+}
+
+model WorkCenter {
+  id          String          @id @default(uuid())
+  stateId     String
+  state       State           @relation(fields: [stateId], references: [id])
+  name        String
+  description String?
+  latitude    Float
+  longitude   Float
+  timezone    String          // Ej: "America/Merida" o "America/Mexico_City"
+  qrToken     String          @unique @default(uuid())
+  users       User[]          // Empleados vinculados a esta sede
+  attendances AttendanceLog[]
+}
+
+model User {
+  id            String          @id @default(uuid())
+  name          String
+  email         String          @unique
+  passwordHash  String
+  role          Role            @default(EMPLOYEE)
+  stateId       String?
+  state         State?          @relation(fields: [stateId], references: [id])
+  workCenterId  String?
+  workCenter    WorkCenter?     @relation(fields: [workCenterId], references: [id])
+  checkInTime   String          @default("08:00:00") // Formato "HH:MM:SS"
+  checkOutTime  String          @default("16:00:00") // Formato "HH:MM:SS"
+  attendances   AttendanceLog[]
+}
+
+model AttendanceLog {
+  id           String           @id @default(uuid())
+  userId       String
+  user         User             @relation(fields: [userId], references: [id])
+  workCenterId String
+  workCenter   WorkCenter       @relation(fields: [workCenterId], references: [id])
+  timestamp    DateTime         @default(now()) // Siempre guardado en UTC en el servidor
+  type         LogType
+  status       AttendanceStatus
+  latitudeRep  Float            // Latitud reportada por el celular
+  longitudeRep Float            // Longitud reportada por el celular
+  celular      String?          // Metadata opcional del dispositivo
+  notes        String?          // Obligatorio si el administrador justifica una incidencia
+}

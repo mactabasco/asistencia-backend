@@ -1,0 +1,26 @@
+{
+  "name": "asistencia-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
+    "build": "pnpm prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.x.x",
+    "bcryptjs": "^2.x.x",
+    "cors": "^2.x.x",
+    "dotenv": "^16.x.x",
+    "express": "^4.x.x",
+    "jsonwebtoken": "^9.x.x",
+    "luxon": "^3.x.x",
+    "pdfkit": "^0.x.x",
+    "qrcode": "^1.x.x"
+  },
+  "devDependencies": {
+    "nodemon": "^3.x.x",
+    "prisma": "^5.x.x"
+  }
+}
