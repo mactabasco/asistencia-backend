@@ -1,9 +1,13 @@
 // src/controllers/adminController.js
-import { PrismaClient } from '@prisma/client';
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg;
+
 const prisma = new PrismaClient();
 
 import PDFDocument from 'pdfkit';
 import stream from 'stream';
+
+
 
 /**
  * Obtiene los registros de asistencia en tiempo real aplicando segmentación por rol

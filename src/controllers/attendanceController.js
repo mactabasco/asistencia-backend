@@ -1,5 +1,7 @@
 // src/controllers/attendanceController.js
-import { PrismaClient } from '@prisma/client';
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg;
+
 const prisma = new PrismaClient();
 
 import { getDistanceInMeters } from '../utils/haversine.js';
