@@ -1,13 +1,9 @@
 // src/controllers/attendanceController.js
-import pkg from '@prisma/client';
-
-
-const { PrismaClient } = pkg;
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 import { getDistanceInMeters } from '../utils/haversine.js';
 import { DateTime } from 'luxon';
-
-const prisma = new PrismaClient();
 
 export async function registerAttendance(req, res) {
   try {

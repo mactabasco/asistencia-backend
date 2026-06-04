@@ -29,7 +29,6 @@ app.listen(PORT, () => {
 
 
 // Añade esto al final de src/app.js para validar la comunicación viva
-import pkg from '@prisma/client';
-const { PrismaClient } = pkg;
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 prisma.user.findMany().then(users => console.log("Conexión exitosa. Usuarios en BD:", users.length));

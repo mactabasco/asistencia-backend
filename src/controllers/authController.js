@@ -1,11 +1,10 @@
 // src/controllers/authController.js
-import pkg from '@prisma/client';
-const { PrismaClient } = pkg;
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET || 'secret_key_2026';
 
 export async function login(req, res) {
