@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "main": "src/app.js",
-  "scripts": {
+"scripts": {
     "dev": "nodemon src/app.js",
     "start": "node src/app.js",
-    "build": "pnpm prisma generate"
+    "build": "npx prisma generate" 
   },
   "dependencies": {
     "@prisma/client": "^5.x.x",
