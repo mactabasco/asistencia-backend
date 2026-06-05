@@ -9,10 +9,10 @@ dotenv.config();
 
 const app = express();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000; // Railway inyectará su propio puerto aquí
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor corriendo exitosamente en el puerto ${PORT}`);
+  console.log(`Servidor activo en el puerto ${PORT}`);
 });
 
 // Middlewares globales
